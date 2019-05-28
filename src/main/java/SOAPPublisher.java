@@ -5,7 +5,8 @@ public class SOAPPublisher {
 
     public static void main(String[] args) {
         UserData userData = new UserData();
-//sadfsfasu
+        //asdhugytsdaugfysdgbcvre
+        //dasfasdfasd
         Endpoint.publish("http://localhost:5000/ws/user", userData);
 
     }
