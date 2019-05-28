@@ -5,9 +5,8 @@ public class Main {
 
     public static void main(String[] args) {
         UserData userData = new UserData();
-        //asdhugytsdaugfysdgbcvre
-        //dasfasdfasd
-        Endpoint.publish("http://localhost:5000/ws/user", userData);
+        
+        Endpoint.publish("http://localhost:5001/ws/user", userData);
 
     }
 

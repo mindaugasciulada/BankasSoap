@@ -1,26 +1,17 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 
-import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
-import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.Response.Status.Family;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.namespace.QName;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.handler.MessageContext;
-
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPFactory;
 import javax.xml.soap.SOAPFault;
@@ -28,15 +19,10 @@ import javax.xml.ws.soap.SOAPFaultException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.protocol.ResponseServer;
 import org.json.JSONException;
-
-import spark.Request;
-import spark.Response;
-@WebService(targetNamespace="http://bankas/user")
+@WebService(targetNamespace="http://localhost/ws/user")
 
 public class UserData implements UserDataService {
 	private Map<Integer, User> users = new HashMap();
@@ -238,8 +224,8 @@ public class UserData implements UserDataService {
 //        System.out.println(userREQ.getBuy());
        
         HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpGet getRequest = new HttpGet("http://172.30.1.140:81/api/courses/"+buy);
-//        HttpGet getRequest = new HttpGet("http://rest:3000/api/courses/"+user.getBuy());
+//        HttpGet getRequest = new HttpGet("http://172.30.1.140:81/api/courses/"+buy);
+        HttpGet getRequest = new HttpGet("http://rest:3000/api/courses/"+buy);
         HttpResponse response = httpClient.execute(getRequest);
 
         // Check for HTTP response code: 200 = success

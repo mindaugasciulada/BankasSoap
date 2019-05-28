@@ -1,7 +1,7 @@
 version: '3'
 services:
   bankas:
-    image: webservisai/webservisai1:latest
+    image: webservisai/soap:latest
     ports:
      - "80:5000"
     links:
