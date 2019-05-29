@@ -7,9 +7,9 @@
 What things you need to install the software and how to install them
 
 ```
-docker build -t webservisai/webservisai1:latest .
+docker build -t webservisai/soap:latest .
 
-docker run --rm -d -p 80:5000 webservisai/webservisai1:latest
+docker run --rm -d -p 80:5000 webservisai/soap:latest
 
 OR using docker-compose
 
@@ -25,60 +25,101 @@ internet: 193.219.12.42
 ```
 
 
-### Get
+### Get All Users
 ```
-/users - all users
-
-/user/:id - get user by id
-
-/users/names/:name - get name suggestions
-
-For example: Database has two names Martynas and Tomas so
-/names/as will print out both names, because of same characters "as"
-
-/users/usernames/:name - get array of objects based of name suggestions
-
-/users/balance/:balance - get array of objects based of balance value
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="http://localhost/ws/user">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <user:getAllUsers/>
+   </soapenv:Body>
+</soapenv:Envelope>
 
 ```
-### POST to add course to user
+### Get User
 ```
-/courses
-{
-"id": 2,
-"name": "Martynas",
-"lastName": "Buinauskas",
-"balance": 4540,
-"buy": 1
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="http://localhost/ws/user">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <user:getUser>
+         <userId>?</userId>
+      </user:getUser>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+### Delete User
+```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="http://localhost/ws/user">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <user:deleteUser>
+         <userId>?</userId>
+      </user:deleteUser>
+   </soapenv:Body>
+</soapenv:Envelope>
 }
 ```
 
-### DELETE to delete course to user
+### Search User balance (returns object)
 ```
-/courses
-{
-"id": 2,
-"name": "Martynas",
-"lastName": "Buinauskas",
-"balance": 4540,
-"buy": 1
-}
-```
-
-
-### Post
-```
-/users - create user
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="http://localhost/ws/user">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <user:searchUserBalanceObject>
+         <balance>?</balance>
+      </user:searchUserBalanceObject>
+   </soapenv:Body>
+</soapenv:Envelope>
 ```
 
-### Put
+### Add course
 ```
-/users/:id - update user
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="http://localhost/ws/user">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <user:addCourse>
+         <UserId>?</UserId>
+         <CourseId>?</CourseId>
+      </user:addCourse>
+   </soapenv:Body>
+</soapenv:Envelope>
 ```
 
-### Delete
+### Delete Course
 ```
-/users/:id - delete user
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="http://localhost/ws/user">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <user:deleteCourse>
+         <userId>1</userId>
+         <CourseId>2</CourseId>
+      </user:deleteCourse>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+### Search User name (returns suggestions)
+```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="http://localhost/ws/user">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <user:searchUserName>
+         <name>?</name>
+      </user:searchUserName>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+### Search User name (returns object)
+```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="http://localhost/ws/user">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <user:searchUserName>
+         <name>?</name>
+      </user:searchUserName>
+   </soapenv:Body>
+</soapenv:Envelope>
 ```
 
 
