@@ -15,6 +15,12 @@ OR using docker-compose
 
 docker-compose up -d
 ```
+### wsdl
+
+```
+http://localhost:5000/ws/user
+
+```
 
 ### Accessibility
 
