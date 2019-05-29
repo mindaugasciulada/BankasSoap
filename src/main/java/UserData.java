@@ -55,7 +55,7 @@ public class UserData implements UserDataService {
         	user.setId(users.size() + 1);
     	} else {
     		user.setId(id);
-    	}
+    	}   	
     	
         user.setName(name);
         user.setLastName(lastName);
@@ -241,8 +241,8 @@ public class UserData implements UserDataService {
 //        System.out.println(userREQ.getBuy());
        
         HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpGet getRequest = new HttpGet("http://172.30.1.140:81/api/courses/"+buy);
-//        HttpGet getRequest = new HttpGet("http://rest:3000/api/courses/"+buy);
+//        HttpGet getRequest = new HttpGet("http://172.30.1.140:81/api/courses/"+buy);
+        HttpGet getRequest = new HttpGet("http://rest:3000/api/courses/"+buy);
         HttpResponse response = httpClient.execute(getRequest);
 
         // Check for HTTP response code: 200 = success
