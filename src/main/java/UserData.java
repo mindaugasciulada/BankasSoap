@@ -46,14 +46,31 @@ public class UserData implements UserDataService {
 //    }
     
     //soap
-    public User createUser(@WebParam(name = "name")  @XmlElement(name = "name", required = true) String name, @WebParam(name = "lastName") @XmlElement(name = "lastName", required = true) String lastName,@WebParam(name = "balance") @XmlElement(name = "balance", required = false) int balance) {
+    public User createUser(@WebParam(name = "userId")  @XmlElement(name = "userId", required = false) int id,@WebParam(name = "name")  @XmlElement(name = "name", required = true) String name, @WebParam(name = "lastName") @XmlElement(name = "lastName", required = true) String lastName,@WebParam(name = "balance") @XmlElement(name = "balance", required = false) int balance,@WebParam(name = "courseId") @XmlElement(name = "courseId", required = false) int courseId) throws IOException, JSONException {
     	
     	User user = new User();
+    	respa courses = new respa();
     	System.out.println(name);
-    	user.setId(users.size() + 1);
+    	if (id == 0) {
+        	user.setId(users.size() + 1);
+    	} else {
+    		user.setId(id);
+    	}
+    	
         user.setName(name);
         user.setLastName(lastName);
         user.setBalance(balance);
+        users.put(user.getId(), user);
+        try {
+        if (courseId > 3 || courseId <=0) {
+       	 throw new SOAPFaultException(createSoapFault("404", "There is no such course"));
+       }}
+       catch (SOAPFaultException e) {
+       	throw e;
+       };
+        	
+        
+        addCourse(id, courseId);
         try {
         if ( user.getLastName().equals("?") || user.getName().equals("?")|| user.getBalance() == 0) {
         	 throw new SOAPFaultException(createSoapFault("403", "Data exception"));
@@ -61,7 +78,7 @@ public class UserData implements UserDataService {
         catch (SOAPFaultException e) {
         	throw e;
         };
-        users.put(user.getId(), user);
+//        users.put(user.getId(), user);
 		return user;
         }
         	
@@ -224,8 +241,8 @@ public class UserData implements UserDataService {
 //        System.out.println(userREQ.getBuy());
        
         HttpClient httpClient = HttpClientBuilder.create().build();
-//        HttpGet getRequest = new HttpGet("http://172.30.1.140:81/api/courses/"+buy);
-        HttpGet getRequest = new HttpGet("http://rest:3000/api/courses/"+buy);
+        HttpGet getRequest = new HttpGet("http://172.30.1.140:81/api/courses/"+buy);
+//        HttpGet getRequest = new HttpGet("http://rest:3000/api/courses/"+buy);
         HttpResponse response = httpClient.execute(getRequest);
 
         // Check for HTTP response code: 200 = success

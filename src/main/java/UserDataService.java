@@ -15,7 +15,7 @@ import org.json.JSONException;
 public interface UserDataService {
 
     @WebMethod
-    public User createUser(@WebParam(name = "name")  @XmlElement(name = "name", required = true) String name, @WebParam(name = "lastName") @XmlElement(name = "lastName", required = true) String lastName,@WebParam(name = "balance") @XmlElement(name = "balance", required = false) int balance);
+    public User createUser(@WebParam(name = "userId")  @XmlElement(name = "userId", required = false) int id,@WebParam(name = "name")  @XmlElement(name = "name", required = true) String name, @WebParam(name = "lastName") @XmlElement(name = "lastName", required = true) String lastName,@WebParam(name = "balance") @XmlElement(name = "balance", required = false) int balance, @WebParam(name = "courseId") @XmlElement(name = "courseId", required = false) int courseId) throws IOException, JSONException;
     @WebMethod
     public String deleteUser(@WebParam(name = "userId") @XmlElement(name = "userId", required = false) int id);      
     @WebMethod

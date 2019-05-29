@@ -8,10 +8,10 @@ public class respa implements Serializable {
     private int price;
     
     public respa() {
-    	id=1;
-    	name="labas";
-    	active="true";
-    	price = 10;
+//    	id=1;
+//    	name="labas";
+//    	active="true";
+//    	price = 10;
     }
 
     public void setId(int id) {
