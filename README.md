@@ -18,7 +18,7 @@ docker-compose up -d
 ### wsdl
 
 ```
-http://localhost:5000/ws/user
+http://localhost:5000/ws/user?wsdl
 
 ```
 
